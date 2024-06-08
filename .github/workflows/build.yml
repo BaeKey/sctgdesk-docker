@@ -38,7 +38,7 @@ jobs:
     - name: Build and push Docker image
       run: |
         cat <<EOF > Dockerfile
-        FROM gcr.io/distroless/static-debian12
+        FROM gcr.io/distroless/base-debian12
         COPY hbbs /usr/bin/hbbs
         COPY hbbr /usr/bin/hbbr
         WORKDIR /root
