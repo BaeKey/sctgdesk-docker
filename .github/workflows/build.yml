@@ -1,4 +1,4 @@
-name: Build and Push Docker Image
+name: Build and Push Docker Image for Rustdesk
 
 on:
   watch:
@@ -45,4 +45,4 @@ jobs:
         COPY hbbr /usr/bin/hbbr
         WORKDIR /root
         EOF
-        docker buildx build --platform linux/amd64 -t ${{ secrets.DOCKER_USERNAME }}/my-minimal-image:latest --push .
+        docker buildx build --platform linux/amd64 -t ${{ secrets.DOCKER_USERNAME }}/rustdesk:latest --push .
