@@ -25,16 +25,13 @@ jobs:
         username: ${{ secrets.DOCKER_USERNAME }}
         password: ${{ secrets.DOCKER_PASSWORD }}
 
-    - name: Download hbbs
+    - name: Download hbbs and hbbr
       run: |
-        latest_url=$(curl -s https://api.github.com/repos/sctg-development/sctgdesk-server/releases/latest | grep browser_download_url | grep amd64 | grep hbbs | cut -d '"' -f 4)
-        curl -L $latest_url -o hbbs
+        latest_url=$(curl -s https://api.github.com/repos/sctg-development/sctgdesk-server/releases/latest | grep browser_download_url | grep amd64 | grep zip | cut -d '"' -f 4)
+        apt update && apt install unzip -y
+        curl -L $latest_url -o rustdesk.zip
+        unzip rustdesk.zip
         chmod +x hbbs
-
-    - name: Download hbbr
-      run: |
-        latest_url=$(curl -s https://api.github.com/repos/sctg-development/sctgdesk-server/releases/latest | grep browser_download_url | grep amd64 | grep hbbr | cut -d '"' -f 4)
-        curl -L $latest_url -o hbbr
         chmod +x hbbr
 
     - name: Build and push Docker image
