@@ -27,12 +27,13 @@ jobs:
 
     - name: Download hbbs and hbbr
       run: |
-        latest_url=$(curl -s https://api.github.com/repos/sctg-development/sctgdesk-server/releases/latest | grep browser_download_url | grep amd64 | grep zip | cut -d '"' -f 4)
-        apt update && apt install unzip -y
+        apt update && apt install -y unzip jq
+        echo "Fetching latest release URL"
+        latest_url=$(curl -s https://api.github.com/repos/sctg-development/sctgdesk-server/releases/latest | jq -r '.assets[] | select(.name | test("amd64.*zip$")) | .browser_download_url')
+        echo "Downloading Rustdesk from $latest_url"
         curl -L $latest_url -o rustdesk.zip
         unzip rustdesk.zip
-        chmod +x hbbs
-        chmod +x hbbr
+        chmod +x hbbs hbbr
 
     - name: Build and push Docker image
       run: |
