@@ -34,14 +34,11 @@ jobs:
         curl -L $latest_url -o rustdesk.zip
         unzip rustdesk.zip
         chmod +x hbbs hbbr
-        pwd
 
     - name: Build and push Docker image
       run: |
-        pwd
-        ls -lah
         cat <<EOF > Dockerfile
-        FROM static-debian12
+        FROM gcr.io/distroless/static-debian12
         COPY hbbs /usr/bin/hbbs
         COPY hbbr /usr/bin/hbbr
         WORKDIR /root
