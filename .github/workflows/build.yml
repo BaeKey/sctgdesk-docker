@@ -34,9 +34,12 @@ jobs:
         curl -L $latest_url -o rustdesk.zip
         unzip rustdesk.zip
         chmod +x hbbs hbbr
+        pwd
 
     - name: Build and push Docker image
       run: |
+        pwd
+        ls -lah
         cat <<EOF > Dockerfile
         FROM scratch
         COPY hbbs /usr/bin/hbbs
