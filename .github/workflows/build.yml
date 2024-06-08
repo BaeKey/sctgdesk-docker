@@ -41,7 +41,7 @@ jobs:
         pwd
         ls -lah
         cat <<EOF > Dockerfile
-        FROM alpine
+        FROM static-debian12
         COPY hbbs /usr/bin/hbbs
         COPY hbbr /usr/bin/hbbr
         WORKDIR /root
