@@ -41,7 +41,7 @@ jobs:
         pwd
         ls -lah
         cat <<EOF > Dockerfile
-        FROM busybox
+        FROM alpine
         COPY hbbs /usr/bin/hbbs
         COPY hbbr /usr/bin/hbbr
         WORKDIR /root
